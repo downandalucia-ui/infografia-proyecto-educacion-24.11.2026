@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualización de Datos: Proyectos de Colaboración en Centros Educativos</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: '#FFFBF5',
+                        tealBrand: {
+                            50: '#F0FDFA',
+                            100: '#CCFBF1',
+                            500: '#14B8A6',
+                            600: '#0D9488',
+                            700: '#0F766E',
+                            800: '#115E59',
+                        },
+                        coralBrand: {
+                            50: '#FFF7ED',
+                            100: '#FFEDD5',
+                            400: '#FB923C',
+                            500: '#F97316',
+                            600: '#EA580C',
+                        },
+                        amberBrand: {
+                            50: '#FFFBEB',
+                            100: '#FEF3C7',
+                            500: '#F59E0B',
+                            600: '#D97706',
+                        },
+                        slateInk: '#1E293B'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FFFBF5;
+            color: #1E293B;
+            -webkit-font-smoothing: antialiased;
+        }
+        .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .card-editorial {
+            background-color: #FFFFFF;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 1px 3px 0 rgba(15, 23, 42, 0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-editorial:hover {
+            box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
+        }
+        .progress-bar-fill {
+            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        /* Estilos de impresión limpios */
+        @media print {
+            body {
+                background-color: #FFFFFF !important;
+                font-size: 10.5pt;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            header {
+                position: static !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .card-editorial {
+                box-shadow: none !important;
+                border: 1px solid #CBD5E1 !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            canvas {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+            table {
+                break-inside: auto;
+            }
+            tr {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .print-break {
+                page-break-before: always;
+                break-before: page;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-16">
+
+    <!-- Barra Superior / Header Editorial -->
+    <header class="bg-white border-b border-orange-100/80 sticky top-0 z-30 backdrop-blur-md bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex items-start sm:items-center gap-3.5">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-tealBrand-600 to-tealBrand-500 flex items-center justify-center text-white shrink-0 shadow-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tealBrand-50 text-tealBrand-700 border border-tealBrand-200/70">
+                            Informe Estadístico &amp; Operativo
+                        </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amberBrand-50 text-amberBrand-700 border border-amberBrand-200/80">
+                            Corte: 20/11/2026
+                        </span>
+                    </div>
+                    <h1 class="font-display text-lg sm:text-xl md:text-2xl font-extrabold text-slateInk tracking-tight mt-1">
+                        Actualización de Datos: Proyectos de Colaboración en Centros Educativos
+                    </h1>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2.5 no-print self-start md:self-center">
+                <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-tealBrand-600 hover:bg-tealBrand-700 text-white text-sm font-semibold shadow-sm transition cursor-pointer">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                    </svg>
+                    Imprimir / Guardar PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-10">
+
+        <!-- Nota metodológica sutil -->
+        <div class="bg-white/80 border border-tealBrand-100 rounded-2xl px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs sm:text-sm text-slate-600">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-tealBrand-500 shrink-0"></span>
+                <span>Base de cálculo: <strong>7 entidades con actividad registrada</strong> (Granadown, Down Jaén, Down Málaga, Down Sevilla, Cedown, Lejeune y Asiquipu). Columnas sin datos numéricos excluidas.</span>
+            </div>
+            <span class="font-semibold text-tealBrand-700 shrink-0">N = 199 Proyectos</span>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- SECCIÓN 1: KPIs GLOBALES CONSOLIDADOS                     -->
+        <!-- ========================================================= -->
+        <section aria-labelledby="sec-kpis">
+            <div class="flex items-center gap-2.5 mb-5">
+                <span class="w-8 h-8 rounded-xl bg-tealBrand-600 text-white font-display font-bold text-sm flex items-center justify-center shadow-sm">1</span>
+                <div>
+                    <h2 id="sec-kpis" class="font-display text-xl sm:text-2xl font-bold text-slateInk">Panorama Global Consolidado</h2>
+                    <p class="text-sm text-slate-500">Totales acumulados y distribución porcentual sobre el conjunto de proyectos presentados</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                <!-- KPI Principal: Total Proyectos -->
+                <div class="lg:col-span-4 card-editorial rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 w-28 h-28 rounded-full bg-tealBrand-50/90 pointer-events-none"></div>
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tealBrand-50 text-tealBrand-700 text-xs font-semibold mb-4">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            Volumen Total Registrado
+                        </div>
+                        <div class="flex items-baseline gap-3">
+                            <span class="font-display text-5xl sm:text-6xl font-extrabold text-slateInk tracking-tight">199</span>
+                            <span class="text-base font-semibold text-tealBrand-600 bg-tealBrand-50 px-2.5 py-0.5 rounded-lg">100%</span>
+                        </div>
+                        <p class="text-sm font-medium text-slate-600 mt-2">Proyectos de colaboración presentados en centros educativos</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <span>Entidades activas analizadas</span>
+                        <span class="font-bold text-slateInk text-sm">7 asociaciones</span>
+                    </div>
+                </div>
+
+                <!-- KPI 2: Tipología (Continuidad vs Nuevos) -->
+                <div class="lg:col-span-4 card-editorial rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amberBrand-50 text-amberBrand-700 text-xs font-semibold">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                Tipología de Proyectos
+                            </span>
+                            <span class="text-xs font-medium text-slate-400">147 + 52 = 199</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mt-2">
+                            <div class="p-3.5 rounded-2xl bg-tealBrand-50/60 border border-tealBrand-100">
+                                <span class="text-xs font-semibold text-tealBrand-800 block">Continuidad</span>
+                                <span class="font-display text-3xl font-extrabold text-tealBrand-700 block mt-1">147</span>
+                                <span class="inline-block mt-1 text-xs font-bold text-tealBrand-600 bg-white px-2 py-0.5 rounded-md shadow-2xs">73,87%</span>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-amberBrand-50/70 border border-amberBrand-100">
+                                <span class="text-xs font-semibold text-amberBrand-800 block">Nuevos</span>
+                                <span class="font-display text-3xl font-extrabold text-amberBrand-600 block mt-1">52</span>
+                                <span class="inline-block mt-1 text-xs font-bold text-amberBrand-600 bg-white px-2 py-0.5 rounded-md shadow-2xs">26,13%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <div class="flex justify-between text-xs font-semibold mb-1.5">
+                            <span class="text-tealBrand-700">Continuidad (73,87%)</span>
+                            <span class="text-amberBrand-600">Nuevos (26,13%)</span>
+                        </div>
+                        <div class="w-full h-3.5 bg-amberBrand-100 rounded-full overflow-hidden flex">
+                            <div class="bg-tealBrand-500 h-full progress-bar-fill" style="width: 73.87%"></div>
+                            <div class="bg-amberBrand-500 h-full progress-bar-fill" style="width: 26.13%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 3: Estado de Resolución (Autorizados vs Pendientes) -->
+                <div class="lg:col-span-4 card-editorial rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-coralBrand-50 text-coralBrand-600 text-xs font-semibold">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Estado de Resolución
+                            </span>
+                            <span class="text-xs font-medium text-slate-400">108 + 91 = 199</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mt-2">
+                            <div class="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-100">
+                                <span class="text-xs font-semibold text-emerald-800 block">Autorizados</span>
+                                <span class="font-display text-3xl font-extrabold text-emerald-600 block mt-1">108</span>
+                                <span class="inline-block mt-1 text-xs font-bold text-emerald-700 bg-white px-2 py-0.5 rounded-md shadow-2xs">54,27%</span>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-coralBrand-50/80 border border-coralBrand-100">
+                                <span class="text-xs font-semibold text-coralBrand-800 block">Pendientes</span>
+                                <span class="font-display text-3xl font-extrabold text-coralBrand-500 block mt-1">91</span>
+                                <span class="inline-block mt-1 text-xs font-bold text-coralBrand-600 bg-white px-2 py-0.5 rounded-md shadow-2xs">45,73%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <div class="flex justify-between text-xs font-semibold mb-1.5">
+                            <span class="text-emerald-700">Autorizados (54,27%)</span>
+                            <span class="text-coralBrand-600">Pendientes (45,73%)</span>
+                        </div>
+                        <div class="w-full h-3.5 bg-coralBrand-100 rounded-full overflow-hidden flex">
+                            <div class="bg-emerald-500 h-full progress-bar-fill" style="width: 54.27%"></div>
+                            <div class="bg-coralBrand-500 h-full progress-bar-fill" style="width: 45.73%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECCIÓN 2: COMPARATIVA VISUAL Y TABLA INTERACTIVA         -->
+        <!-- ========================================================= -->
+        <section aria-labelledby="sec-entidades" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-tealBrand-600 text-white font-display font-bold text-sm flex items-center justify-center shadow-sm">2</span>
+                    <div>
+                        <h2 id="sec-entidades" class="font-display text-xl sm:text-2xl font-bold text-slateInk">Desglose Comparativo por Entidad</h2>
+                        <p class="text-sm text-slate-500">Peso relativo sobre el total global (199) y tasas internas de resolución y tipología</p>
+                    </div>
+                </div>
+
+                <!-- Controles interactivos de vista y ordenación -->
+                <div class="flex flex-wrap items-center gap-2 no-print">
+                    <div class="inline-flex rounded-xl bg-white p-1 border border-slate-200 shadow-2xs">
+                        <button id="btn-mode-internal" onclick="setPercentMode('internal')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-tealBrand-600 text-white transition cursor-pointer">
+                            % Interno Entidad
+                        </button>
+                        <button id="btn-mode-global" onclick="setPercentMode('global')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slateInk transition cursor-pointer">
+                            % Sobre Total Global
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos Comparativos (Chart.js) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Gráfico 1: Estado de Resolución -->
+                <div class="card-editorial rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-display font-bold text-base sm:text-lg text-slateInk">Estado de Resolución por Asociación</h3>
+                            <p class="text-xs text-slate-500">Proyectos Autorizados vs. Pendientes de Autorización</p>
+                        </div>
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600">N = 199</span>
+                    </div>
+                    <div class="relative h-72 w-full">
+                        <canvas id="chartResolution"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico 2: Tipología de Proyectos -->
+                <div class="card-editorial rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-display font-bold text-base sm:text-lg text-slateInk">Tipología por Asociación</h3>
+                            <p class="text-xs text-slate-500">Proyectos de Continuidad vs. Nuevos Proyectos</p>
+                        </div>
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600">147 Cont. / 52 Nuevos</span>
+                    </div>
+                    <div class="relative h-72 w-full">
+                        <canvas id="chartTypology"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explorador de Entidad Destacada + Tabla Completa -->
+            <div class="card-editorial rounded-3xl overflow-hidden">
+                <!-- Selector de filtros / pestañas por entidad -->
+                <div class="p-5 sm:p-6 bg-gradient-to-r from-tealBrand-50/70 via-white to-orange-50/50 border-b border-slate-100">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-tealBrand-700">Explorador Interactivo</span>
+                            <h3 class="font-display text-lg font-bold text-slateInk">Ficha Detallada y Matriz de Resultados</h3>
+                        </div>
+
+                        <!-- Botones de ordenación -->
+                        <div class="flex flex-wrap items-center gap-2 no-print">
+                            <span class="text-xs font-medium text-slate-500 mr-1">Ordenar tabla por:</span>
+                            <button onclick="sortEntities('total')" id="sort-total" class="sort-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slateInk text-white transition cursor-pointer">
+                                Volumen Total
+                            </button>
+                            <button onclick="sortEntities('authRate')" id="sort-authRate" class="sort-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer">
+                                % Autorización
+                            </button>
+                            <button onclick="sortEntities('pendientes')" id="sort-pendientes" class="sort-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer">
+                                Vol. Pendientes
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pestañas rápidas por asociación -->
+                    <div class="flex flex-wrap gap-2 mt-4 no-print" id="entity-pills">
+                        <!-- Se puebla dinámicamente con JS -->
+                    </div>
+                </div>
+
+                <!-- Tarjeta Spotlight de la Entidad Seleccionada -->
+                <div id="entity-spotlight" class="p-5 sm:p-6 bg-amberBrand-50/30 border-b border-slate-100">
+                    <!-- Contenido dinámico JS -->
+                </div>
+
+                <!-- Tabla Responsiva Completa -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50/90 border-b border-slate-200/80 text-xs font-bold uppercase tracking-wider text-slate-500">
+                                <th class="py-3.5 px-4 sm:px-6">Entidad</th>
+                                <th class="py-3.5 px-4 text-right">Total (% Global)</th>
+                                <th class="py-3.5 px-4 text-right">Continuidad</th>
+                                <th class="py-3.5 px-4 text-right">Nuevos</th>
+                                <th class="py-3.5 px-4 text-right">Autorizados</th>
+                                <th class="py-3.5 px-4 text-right">Pendientes</th>
+                                <th class="py-3.5 px-4 sm:px-6 w-44">Balance Resolución</th>
+                            </tr>
+                        </thead>
+                        <tbody id="entities-table-body" class="divide-y divide-slate-100 text-sm">
+                            <!-- Filas dinámicas JS -->
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-tealBrand-50/70 font-bold text-slateInk border-t-2 border-tealBrand-200 text-sm">
+                                <td class="py-4 px-4 sm:px-6 font-display">TOTAL CONSOLIDADO</td>
+                                <td class="py-4 px-4 text-right">199 <span class="text-xs font-semibold text-tealBrand-700">(100%)</span></td>
+                                <td class="py-4 px-4 text-right">147 <span class="text-xs font-normal text-slate-600">(73,87%)</span></td>
+                                <td class="py-4 px-4 text-right">52 <span class="text-xs font-normal text-slate-600">(26,13%)</span></td>
+                                <td class="py-4 px-4 text-right text-emerald-700">108 <span class="text-xs font-semibold">(54,27%)</span></td>
+                                <td class="py-4 px-4 text-right text-coralBrand-600">91 <span class="text-xs font-semibold">(45,73%)</span></td>
+                                <td class="py-4 px-4 sm:px-6">
+                                    <div class="w-full h-2.5 bg-coralBrand-200 rounded-full overflow-hidden flex">
+                                        <div class="bg-emerald-500 h-full" style="width: 54.27%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECCIÓN 3: ANÁLISIS DE CAUSAS DE FALTA DE RESOLUCIÓN      -->
+        <!-- ========================================================= -->
+        <section aria-labelledby="sec-causas" class="space-y-6">
+            <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-coralBrand-500 text-white font-display font-bold text-sm flex items-center justify-center shadow-sm">3</span>
+                <div>
+                    <h2 id="sec-causas" class="font-display text-xl sm:text-2xl font-bold text-slateInk">Análisis Cuantitativo y Cualitativo de los 91 Proyectos Pendientes</h2>
+                    <p class="text-sm text-slate-500">Cruce entre volumen de proyectos sin resolver (45,73% del total) y las casillas marcadas con [X] en la matriz de causas</p>
+                </div>
+            </div>
+
+            <!-- Barra de distribución de los 91 pendientes -->
+            <div class="card-editorial rounded-3xl p-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <h3 class="font-display font-bold text-base text-slateInk">Distribución de los 91 Proyectos Pendientes según Causa Registrada</h3>
+                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-coralBrand-50 text-coralBrand-700 border border-coralBrand-200">Base: 91 Pendientes = 100%</span>
+                </div>
+
+                <!-- Barra segmentada visual -->
+                <div class="w-full h-5 rounded-full overflow-hidden flex bg-slate-100 my-3 shadow-inner">
+                    <div class="bg-coralBrand-500 h-full flex items-center justify-center text-[11px] font-bold text-white" style="width: 89.01%" title="Causa 1 marcada: 81 proyectos (89,01%)">
+                        89,01% (81 proy.)
+                    </div>
+                    <div class="bg-slate-400 h-full flex items-center justify-center text-[11px] font-bold text-white" style="width: 10.99%" title="Sin causa marcada: 10 proyectos (10,99%)">
+                        10,99%
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600 mt-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-sm bg-coralBrand-500 inline-block"></span>
+                        <span><strong>81 proyectos (89,01%)</strong> en entidades con <strong>Causa 1 [X]</strong> (incluye los 4 de Down Jaén con concurrencia de Causa 2)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-sm bg-slate-400 inline-block"></span>
+                        <span><strong>10 proyectos (10,99%)</strong> en entidades sin casilla [X] marcada (Down Málaga y Cedown)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjetas de las 3 categorías de análisis -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Causa 1 -->
+                <div class="card-editorial rounded-3xl p-6 border-t-4 border-t-coralBrand-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-coralBrand-50 text-coralBrand-700 font-display font-bold text-xs">CAUSA 1 · MARCADA [X]</span>
+                            <span class="font-display font-extrabold text-xl text-coralBrand-600">89,01%</span>
+                        </div>
+                        <h3 class="font-display font-bold text-base text-slateInk leading-snug">
+                            "No tramitado por el centro educativo ante la D.T. hasta julio/septiembre"
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                            Principal cuello de botella administrativo. Afecta a <strong>4 entidades</strong> que concentran <strong>81 de los 91 proyectos pendientes</strong> a nivel autonómico.
+                        </p>
+
+                        <!-- Desglose cuantitativo Causa 1 -->
+                        <div class="mt-4 space-y-2.5">
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                <div class="flex justify-between text-xs font-bold text-slateInk">
+                                    <span>1. Down Jaén</span>
+                                    <span class="text-coralBrand-600">34 pend. (37,36% del total pend.)</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-slate-200 rounded-full mt-1.5 overflow-hidden">
+                                    <div class="bg-coralBrand-500 h-full" style="width: 37.36%"></div>
+                                </div>
+                            </div>
+
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                <div class="flex justify-between text-xs font-bold text-slateInk">
+                                    <span>2. Granadown</span>
+                                    <span class="text-coralBrand-600">26 pend. (28,57% del total pend.)</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-slate-200 rounded-full mt-1.5 overflow-hidden">
+                                    <div class="bg-coralBrand-500 h-full" style="width: 28.57%"></div>
+                                </div>
+                            </div>
+
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                <div class="flex justify-between text-xs font-bold text-slateInk">
+                                    <span>3. Down Sevilla</span>
+                                    <span class="text-coralBrand-600">17 pend. (18,68% del total pend.)</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-slate-200 rounded-full mt-1.5 overflow-hidden">
+                                    <div class="bg-coralBrand-500 h-full" style="width: 18.68%"></div>
+                                </div>
+                            </div>
+
+                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                <div class="flex justify-between text-xs font-bold text-slateInk">
+                                    <span>4. Lejeune</span>
+                                    <span class="text-coralBrand-600">4 pend. (4,40% del total pend.)</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-slate-200 rounded-full mt-1.5 overflow-hidden">
+                                    <div class="bg-coralBrand-500 h-full" style="width: 4.40%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <span class="text-slate-500">Subtotal bloqueado por Causa 1:</span>
+                        <span class="font-bold text-slateInk">81 / 91 proyectos</span>
+                    </div>
+                </div>
+
+                <!-- Causa 2 -->
+                <div class="card-editorial rounded-3xl p-6 border-t-4 border-t-amberBrand-500 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-amberBrand-50 text-amberBrand-700 font-display font-bold text-xs">CAUSA 2 · MARCADA [X (4)]</span>
+                            <span class="font-display font-extrabold text-xl text-amberBrand-600">4,40%</span>
+                        </div>
+                        <h3 class="font-display font-bold text-base text-slateInk leading-snug">
+                            "Retraso en la presentación por parte de la Asociación"
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                            Incidencia puntual y acotada exclusivamente a una única entidad, donde <strong>concurre simultáneamente con la Causa 1</strong>.
+                        </p>
+
+                        <div class="mt-5 p-4 rounded-2xl bg-amberBrand-50/60 border border-amberBrand-200/70 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-display font-bold text-sm text-slateInk">Entidad afectada: DOWN JAÉN</span>
+                                <span class="px-2 py-0.5 rounded-md bg-amberBrand-500 text-white text-xs font-bold">4 proyectos</span>
+                            </div>
+                            <ul class="space-y-2 text-xs text-slate-700">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-amberBrand-600 font-bold">•</span>
+                                    <span>Supone el <strong>4,40%</strong> del total de los 91 proyectos pendientes globales.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-amberBrand-600 font-bold">•</span>
+                                    <span>Representa el <strong>11,76%</strong> de los 34 proyectos pendientes internos de Down Jaén (los 30 restantes se explican solo por Causa 1).</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-amberBrand-600 font-bold">•</span>
+                                    <span>Ninguna de las otras 6 entidades registra retrasos imputables a la propia asociación.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <span class="text-slate-500">Impacto directo aislado:</span>
+                        <span class="font-bold text-amberBrand-700">4 / 91 proyectos (Concurrencia)</span>
+                    </div>
+                </div>
+
+                <!-- Casos sin causa marcada -->
+                <div class="card-editorial rounded-3xl p-6 border-t-4 border-t-tealBrand-600 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-tealBrand-50 text-tealBrand-700 font-display font-bold text-xs">SIN CASILLA [X] MARCADA</span>
+                            <span class="font-display font-extrabold text-xl text-tealBrand-600">10,99%</span>
+                        </div>
+                        <h3 class="font-display font-bold text-base text-slateInk leading-snug">
+                            Proyectos pendientes sin causa tipificada en la matriz
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                            Existen <strong>10 proyectos pendientes</strong> pertenecientes a dos entidades con alta tasa de autorización que no tienen marcada ninguna de las dos causas anteriores.
+                        </p>
+
+                        <div class="mt-5 space-y-3">
+                            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-display font-bold text-sm text-slateInk">DOWN MÁLAGA</span>
+                                    <span class="text-xs font-bold text-tealBrand-700 bg-tealBrand-50 px-2 py-0.5 rounded-md">8 pendientes</span>
+                                </div>
+                                <p class="text-xs text-slate-600 mt-1.5">
+                                    Representa el <strong>8,79%</strong> de los 91 pendientes globales (y el 22,22% de sus 36 proyectos). Pese a contar con 28 autorizados (77,78%), sus 8 pendientes no registran causa marcada.
+                                </p>
+                            </div>
+
+                            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-display font-bold text-sm text-slateInk">CEDOWN</span>
+                                    <span class="text-xs font-bold text-tealBrand-700 bg-tealBrand-50 px-2 py-0.5 rounded-md">2 pendientes</span>
+                                </div>
+                                <p class="text-xs text-slate-600 mt-1.5">
+                                    Representa el <strong>2,20%</strong> de los 91 pendientes globales (y el 16,67% de sus 12 proyectos). Tiene 10 autorizados (83,33%) y 2 en trámite sin marca de retraso.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+                        <span class="text-slate-500">Nota: Asiquipu tiene 0 pendientes</span>
+                        <span class="font-bold text-tealBrand-700">10 / 91 proyectos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECCIÓN 4: PROPUESTAS DE TRABAJO (NOTAS DE GRANADOWN)     -->
+        <!-- ========================================================= -->
+        <section aria-labelledby="sec-propuestas" class="space-y-6 print-break">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-xl bg-tealBrand-600 text-white font-display font-bold text-sm flex items-center justify-center shadow-sm">4</span>
+                    <div>
+                        <h2 id="sec-propuestas" class="font-display text-xl sm:text-2xl font-bold text-slateInk">Líneas y Propuestas de Trabajo</h2>
+                        <p class="text-sm text-slate-500">Medidas prioritarias para agilizar la gestión administrativa y respaldar las intervenciones en curso</p>
+                    </div>
+                </div>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-tealBrand-50 border border-tealBrand-200 text-tealBrand-800 text-xs font-semibold self-start sm:self-center">
+                    <svg class="w-4 h-4 text-tealBrand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    2 Ejes de Acción Prioritarios
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Propuesta 1 -->
+                <article class="card-editorial rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-tealBrand-50 border border-tealBrand-100 text-tealBrand-600 flex items-center justify-center shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-tealBrand-600">Propuesta 01 · Simplificación Administrativa</span>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-slateInk leading-snug">
+                                Simplificación del procedimiento administrativo y tramitación única por centro
+                            </h3>
+                            <div class="space-y-2.5 text-sm text-slate-600 leading-relaxed">
+                                <p>
+                                    <strong class="text-slateInk">Diagnóstico:</strong> El circuito administrativo actual que deben seguir los centros educativos ante la Delegación Territorial ralentiza considerablemente los plazos y dificulta la puesta en marcha efectiva de las actuaciones previstas en el proyecto.
+                                </p>
+                                <p>
+                                    <strong class="text-tealBrand-800">Propuesta de mejora:</strong> Eliminar la excesiva burocratización sustituyendo las autorizaciones individualizadas por una <strong>tramitación general única por centro educativo</strong>, que englobe de manera conjunta a todo el alumnado atendido en dicho centro.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-slate-100">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-tealBrand-700 bg-tealBrand-50 px-2.5 py-1 rounded-lg">
+                            Objetivo: Reducir carga burocrática mediante expediente único por centro
+                        </span>
+                    </div>
+                </article>
+
+                <!-- Propuesta 2 -->
+                <article class="card-editorial rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-coralBrand-50 border border-coralBrand-100 text-coralBrand-600 flex items-center justify-center shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-coralBrand-600">Propuesta 02 · Regularización Documental</span>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-slateInk leading-snug">
+                                Regularización documental en centros con colaboración activa
+                            </h3>
+                            <div class="space-y-2.5 text-sm text-slate-600 leading-relaxed">
+                                <p>
+                                    <strong class="text-slateInk">Diagnóstico:</strong> En la mayoría de los casos sin resolver, la demora obedece a que los propios centros educativos no remitieron en junio a la Delegación Territorial la documentación. Sin embargo, muchos de estos centros consideran imprescindibles las actuaciones de coordinación, asesoramiento y visitas escolares.
+                                </p>
+                                <p>
+                                    <strong class="text-coralBrand-700">Propuesta de mejora:</strong> Establecer un mecanismo ágil de seguimiento y recordatorio dirigido a los centros educativos que ya mantienen colaboración activa para formalizar y remitir el envío de la documentación firmada, respaldando administrativamente el trabajo técnico que ya se está ejecutando en las aulas.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5 pt-3 border-t border-slate-100">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-coralBrand-700 bg-coralBrand-50 px-2.5 py-1 rounded-lg">
+                            Objetivo: Formalizar administrativamente las intervenciones ya activas en los centros
+                        </span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Editorial -->
+    <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-14 pt-6 border-t border-orange-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div>
+            Fuente: <strong>ACTUALIZACIÓN DE DATOS PROYECTOS EDUCACIÓN.xlsx</strong> · Datos consolidados a fecha de corte 20/11/2026.
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-tealBrand-500"></span>
+            <span>Infografía interactiva generada sobre registros numéricos validados (N = 199)</span>
+        </div>
+    </footer>
+
+    <!-- Lógica Interactiva y Gráficos -->
+    <script>
+        // Dataset exacto según especificaciones (solo 7 entidades con datos numéricos)
+        const entitiesData = [
+            {
+                id: 'granadown',
+                name: 'GRANADOWN',
+                total: 80,
+                pctGlobalTotal: '40,20%',
+                continuidad: 62,
+                pctIntCont: '77,50%',
+                pctGlobCont: '31,16%',
+                nuevos: 18,
+                pctIntNuevos: '22,50%',
+                pctGlobNuevos: '9,05%',
+                autorizados: 54,
+                pctIntAuth: '67,50%',
+                pctGlobAuthOfAllAuth: '50,00%',
+                pctGlobAuthOf199: '27,14%',
+                authRateNum: 67.50,
+                pendientes: 26,
+                pctIntPend: '32,50%',
+                pctGlobPendOfAllPend: '28,57%',
+                pctGlobPendOf199: '13,07%',
+                causa1: true,
+                causa2: false,
+                causaNote: 'Causa 1 marcada [X]: No tramitado por el centro educativo ante la D.T. hasta julio/septiembre (26 proyectos = 28,57% de los 91 pendientes).'
+            },
+            {
+                id: 'jaen',
+                name: 'DOWN JAÉN',
+                total: 36,
+                pctGlobalTotal: '18,09%',
+                continuidad: 11,
+                pctIntCont: '30,56%',
+                pctGlobCont: '5,53%',
+                nuevos: 25,
+                pctIntNuevos: '69,44%',
+                pctGlobNuevos: '12,56%',
+                autorizados: 2,
+                pctIntAuth: '5,56%',
+                pctGlobAuthOfAllAuth: '1,85%',
+                pctGlobAuthOf199: '1,01%',
+                authRateNum: 5.56,
+                pendientes: 34,
+                pctIntPend: '94,44%',
+                pctGlobPendOfAllPend: '37,36%',
+                pctGlobPendOf199: '17,09%',
+                causa1: true,
+                causa2: true,
+                causaNote: 'Concurrencia Causa 1 [X] (34 pend.; 37,36% del total pend.) y Causa 2 [X (4)] por retraso en presentación de la Asociación (4 proy.; 4,40% del total pend. y 11,76% de sus 34 pend.).'
+            },
+            {
+                id: 'malaga',
+                name: 'DOWN MÁLAGA',
+                total: 36,
+                pctGlobalTotal: '18,09%',
+                continuidad: 33,
+                pctIntCont: '91,67%',
+                pctGlobCont: '16,58%',
+                nuevos: 3,
+                pctIntNuevos: '8,33%',
+                pctGlobNuevos: '1,51%',
+                autorizados: 28,
+                pctIntAuth: '77,78%',
+                pctGlobAuthOfAllAuth: '25,93%',
+                pctGlobAuthOf199: '14,07%',
+                authRateNum: 77.78,
+                pendientes: 8,
+                pctIntPend: '22,22%',
+                pctGlobPendOfAllPend: '8,79%',
+                pctGlobPendOf199: '4,02%',
+                causa1: false,
+                causa2: false,
+                causaNote: 'Sin casilla [X] marcada en la matriz de causas para sus 8 proyectos pendientes (8,79% del total de pendientes).'
+            },
+            {
+                id: 'sevilla',
+                name: 'DOWN SEVILLA',
+                total: 29,
+                pctGlobalTotal: '14,57%',
+                continuidad: 25,
+                pctIntCont: '86,21%',
+                pctGlobCont: '12,56%',
+                nuevos: 4,
+                pctIntNuevos: '13,79%',
+                pctGlobNuevos: '2,01%',
+                autorizados: 12,
+                pctIntAuth: '41,38%',
+                pctGlobAuthOfAllAuth: '11,11%',
+                pctGlobAuthOf199: '6,03%',
+                authRateNum: 41.38,
+                pendientes: 17,
+                pctIntPend: '58,62%',
+                pctGlobPendOfAllPend: '18,68%',
+                pctGlobPendOf199: '8,54%',
+                causa1: true,
+                causa2: false,
+                causaNote: 'Causa 1 marcada [X]: No tramitado por el centro educativo ante la D.T. hasta julio/septiembre (17 proyectos = 18,68% de los 91 pendientes).'
+            },
+            {
+                id: 'cedown',
+                name: 'CEDOWN',
+                total: 12,
+                pctGlobalTotal: '6,03%',
+                continuidad: 10,
+                pctIntCont: '83,33%',
+                pctGlobCont: '5,03%',
+                nuevos: 2,
+                pctIntNuevos: '16,67%',
+                pctGlobNuevos: '1,01%',
+                autorizados: 10,
+                pctIntAuth: '83,33%',
+                pctGlobAuthOfAllAuth: '9,26%',
+                pctGlobAuthOf199: '5,03%',
+                authRateNum: 83.33,
+                pendientes: 2,
+                pctIntPend: '16,67%',
+                pctGlobPendOfAllPend: '2,20%',
+                pctGlobPendOf199: '1,01%',
+                causa1: false,
+                causa2: false,
+                causaNote: 'Excepción sin casilla [X] marcada: 2 proyectos pendientes (2,20% de los 91 pendientes) sin causa tipificada.'
+            },
+            {
+                id: 'lejeune',
+                name: 'LEJEUNE',
+                total: 4,
+                pctGlobalTotal: '2,01%',
+                continuidad: 4,
+                pctIntCont: '100,00%',
+                pctGlobCont: '2,01%',
+                nuevos: 0,
+                pctIntNuevos: '0,00%',
+                pctGlobNuevos: '0,00%',
+                autorizados: 0,
+                pctIntAuth: '0,00%',
+                pctGlobAuthOfAllAuth: '0,00%',
+                pctGlobAuthOf199: '0,00%',
+                authRateNum: 0.00,
+                pendientes: 4,
+                pctIntPend: '100,00%',
+                pctGlobPendOfAllPend: '4,40%',
+                pctGlobPendOf199: '2,01%',
+                causa1: true,
+                causa2: false,
+                causaNote: 'Causa 1 marcada [X]: No tramitado por el centro educativo ante la D.T. hasta julio/septiembre (4 proyectos = 100% de su cartera y 4,40% de los 91 pendientes).'
+            },
+            {
+                id: 'asiquipu',
+                name: 'ASIQUIPU',
+                total: 2,
+                pctGlobalTotal: '1,01%',
+                continuidad: 2,
+                pctIntCont: '100,00%',
+                pctGlobCont: '1,01%',
+                nuevos: 0,
+                pctIntNuevos: '0,00%',
+                pctGlobNuevos: '0,00%',
+                autorizados: 2,
+                pctIntAuth: '100,00%',
+                pctGlobAuthOfAllAuth: '1,85%',
+                pctGlobAuthOf199: '1,01%',
+                authRateNum: 100.00,
+                pendientes: 0,
+                pctIntPend: '0,00%',
+                pctGlobPendOfAllPend: '0,00%',
+                pctGlobPendOf199: '0,00%',
+                causa1: false,
+                causa2: false,
+                causaNote: '100% de sus proyectos (2 de 2) se encuentran autorizados. Sin proyectos pendientes.'
+            }
+        ];
+
+        let selectedEntityId = 'granadown';
+        let percentMode = 'internal'; // 'internal' | 'global'
+        let currentSort = 'total';
+
+        // Inicializar pestañas de entidades
+        function renderEntityPills() {
+            const container = document.getElementById('entity-pills');
+            container.innerHTML = entitiesData.map(ent => {
+                const isSelected = ent.id === selectedEntityId;
+                return `
+                    <button onclick="selectEntity('${ent.id}')"
+                        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5 ${
+                            isSelected
+                                ? 'bg-tealBrand-600 text-white shadow-sm'
+                                : 'bg-white text-slate-600 border border-slate-200 hover:border-tealBrand-300 hover:text-tealBrand-700'
+                        }">
+                        <span>${ent.name}</span>
+                        <span class="px-1.5 py-0.2 rounded-md text-[10px] ${isSelected ? 'bg-tealBrand-700 text-tealBrand-50' : 'bg-slate-100 text-slate-500'}">${ent.total}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        // Renderizar tarjeta Spotlight de la entidad activa
+        function renderEntitySpotlight() {
+            const ent = entitiesData.find(e => e.id === selectedEntityId);
+            if (!ent) return;
+
+            const container = document.getElementById('entity-spotlight');
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+                    <div class="lg:col-span-4">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-md bg-tealBrand-600 text-white text-xs font-bold">Ficha Seleccionada</span>
+                            <span class="text-xs font-semibold text-slate-500">Peso global: <strong class="text-slateInk">${ent.pctGlobalTotal}</strong></span>
+                        </div>
+                        <h4 class="font-display text-2xl font-extrabold text-slateInk mt-1.5">${ent.name}</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed bg-white p-3 rounded-xl border border-slate-200/70">
+                            <strong class="text-slateInk">Diagnóstico de estado:</strong> ${ent.causaNote}
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200/70">
+                            <span class="text-[11px] font-bold uppercase text-slate-400 block">Total Proyectos</span>
+                            <span class="font-display text-2xl font-extrabold text-slateInk mt-0.5 block">${ent.total}</span>
+                            <span class="text-xs font-semibold text-tealBrand-600">${ent.pctGlobalTotal} del total (199)</span>
+                        </div>
+
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200/70">
+                            <span class="text-[11px] font-bold uppercase text-slate-400 block">Continuidad / Nuevos</span>
+                            <span class="font-display text-xl font-extrabold text-slateInk mt-0.5 block">${ent.continuidad} <span class="text-slate-300 font-normal">/</span> ${ent.nuevos}</span>
+                            <span class="text-xs font-medium text-slate-500">${ent.pctIntCont} / ${ent.pctIntNuevos}</span>
+                        </div>
+
+                        <div class="bg-white p-3.5 rounded-2xl border border-emerald-200/80">
+                            <span class="text-[11px] font-bold uppercase text-emerald-700 block">Autorizados</span>
+                            <span class="font-display text-2xl font-extrabold text-emerald-600 mt-0.5 block">${ent.autorizados}</span>
+                            <span class="text-[11px] font-semibold text-emerald-700 block">${ent.pctIntAuth} internos</span>
+                            <span class="text-[10px] text-slate-400 block">${ent.pctGlobAuthOfAllAuth} de los 108 aut.</span>
+                        </div>
+
+                        <div class="bg-white p-3.5 rounded-2xl border border-coralBrand-200/80">
+                            <span class="text-[11px] font-bold uppercase text-coralBrand-700 block">Pendientes</span>
+                            <span class="font-display text-2xl font-extrabold text-coralBrand-500 mt-0.5 block">${ent.pendientes}</span>
+                            <span class="text-[11px] font-semibold text-coralBrand-600 block">${ent.pctIntPend} internos</span>
+                            <span class="text-[10px] text-slate-400 block">${ent.pctGlobPendOfAllPend} de los 91 pend.</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Renderizar tabla completa según modo de porcentaje y orden
+        function renderTable() {
+            const sorted = [...entitiesData].sort((a, b) => {
+                if (currentSort === 'total') return b.total - a.total;
+                if (currentSort === 'authRate') return b.authRateNum - a.authRateNum;
+                if (currentSort === 'pendientes') return b.pendientes - a.pendientes;
+                return 0;
+            });
+
+            const tbody = document.getElementById('entities-table-body');
+            tbody.innerHTML = sorted.map(ent => {
+                const isSelected = ent.id === selectedEntityId;
+
+                const contPctLabel = percentMode === 'internal'
+                    ? `${ent.pctIntCont}`
+                    : `${ent.pctGlobCont} glob.`;
+
+                const nuevosPctLabel = percentMode === 'internal'
+                    ? `${ent.pctIntNuevos}`
+                    : `${ent.pctGlobNuevos} glob.`;
+
+                const authPctLabel = percentMode === 'internal'
+                    ? `${ent.pctIntAuth}`
+                    : `${ent.pctGlobAuthOfAllAuth} de aut.`;
+
+                const pendPctLabel = percentMode === 'internal'
+                    ? `${ent.pctIntPend}`
+                    : `${ent.pctGlobPendOfAllPend} de pend.`;
+
+                return `
+                    <tr onclick="selectEntity('${ent.id}')" class="cursor-pointer transition ${isSelected ? 'bg-tealBrand-50/40' : 'hover:bg-slate-50/90'}">
+                        <td class="py-3.5 px-4 sm:px-6 font-display font-bold text-slateInk flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full ${isSelected ? 'bg-tealBrand-600' : 'bg-slate-300'}"></span>
+                            <span>${ent.name}</span>
+                            ${ent.causa1 ? '<span title="Causa 1 marcada [X]" class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-coralBrand-100 text-coralBrand-700">C1</span>' : ''}
+                            ${ent.causa2 ? '<span title="Causa 2 marcada [X (4)]" class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-amberBrand-100 text-amberBrand-700">C2</span>' : ''}
+                        </td>
+                        <td class="py-3.5 px-4 text-right font-bold text-slateInk">
+                            ${ent.total} <span class="text-xs font-semibold text-tealBrand-600">(${ent.pctGlobalTotal})</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right text-slate-700">
+                            <span class="font-semibold">${ent.continuidad}</span>
+                            <span class="text-xs text-slate-400 block sm:inline">(${contPctLabel})</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right text-slate-700">
+                            <span class="font-semibold">${ent.nuevos}</span>
+                            <span class="text-xs text-slate-400 block sm:inline">(${nuevosPctLabel})</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right">
+                            <span class="font-bold text-emerald-600">${ent.autorizados}</span>
+                            <span class="text-xs text-emerald-700/80 block sm:inline">(${authPctLabel})</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right">
+                            <span class="font-bold text-coralBrand-600">${ent.pendientes}</span>
+                            <span class="text-xs text-coralBrand-600/80 block sm:inline">(${pendPctLabel})</span>
+                        </td>
+                        <td class="py-3.5 px-4 sm:px-6">
+                            <div class="flex items-center gap-2">
+                                <div class="w-full h-2.5 bg-coralBrand-100 rounded-full overflow-hidden flex">
+                                    <div class="bg-emerald-500 h-full" style="width: ${ent.authRateNum}%"></div>
+                                    <div class="bg-coralBrand-400 h-full" style="width: ${100 - ent.authRateNum}%"></div>
+                                </div>
+                                <span class="text-[11px] font-bold text-slate-600 w-11 text-right">${Math.round(ent.authRateNum)}%</span>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function selectEntity(id) {
+            selectedEntityId = id;
+            renderEntityPills();
+            renderEntitySpotlight();
+            renderTable();
+        }
+
+        function setPercentMode(mode) {
+            percentMode = mode;
+            const btnInt = document.getElementById('btn-mode-internal');
+            const btnGlob = document.getElementById('btn-mode-global');
+
+            if (mode === 'internal') {
+                btnInt.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-tealBrand-600 text-white transition cursor-pointer';
+                btnGlob.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slateInk transition cursor-pointer';
+            } else {
+                btnGlob.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-tealBrand-600 text-white transition cursor-pointer';
+                btnInt.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slateInk transition cursor-pointer';
+            }
+            renderTable();
+        }
+
+        function sortEntities(criteria) {
+            currentSort = criteria;
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.className = 'sort-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer';
+            });
+            const activeBtn = document.getElementById('sort-' + criteria);
+            if (activeBtn) {
+                activeBtn.className = 'sort-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slateInk text-white transition cursor-pointer';
+            }
+            renderTable();
+        }
+
+        // Inicializar Gráficos con Chart.js
+        function initCharts() {
+            const labels = entitiesData.map(e => e.name);
+
+            // Gráfico 1: Autorizados vs Pendientes
+            const ctxRes = document.getElementById('chartResolution').getContext('2d');
+            new Chart(ctxRes, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Autorizados (108)',
+                            data: entitiesData.map(e => e.autorizados),
+                            backgroundColor: '#10B981',
+                            borderRadius: 6,
+                        },
+                        {
+                            label: 'Pendientes (91)',
+                            data: entitiesData.map(e => e.pendientes),
+                            backgroundColor: '#F97316',
+                            borderRadius: 6,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { font: { family: 'Inter', size: 12, weight: '600' }, usePointStyle: true }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const ent = entitiesData[context.dataIndex];
+                                    if (context.datasetIndex === 0) {
+                                        return `Interno: ${ent.pctIntAuth} | De los autorizados: ${ent.pctGlobAuthOfAllAuth}`;
+                                    } else {
+                                        return `Interno: ${ent.pctIntPend} | De los pendientes: ${ent.pctGlobPendOfAllPend}`;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { display: false },
+                            ticks: { font: { family: 'Inter', size: 11, weight: '600' } }
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            grid: { color: '#F1F5F9' },
+                            ticks: { font: { family: 'Inter', size: 11 } }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico 2: Continuidad vs Nuevos
+            const ctxTyp = document.getElementById('chartTypology').getContext('2d');
+            new Chart(ctxTyp, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Continuidad (147)',
+                            data: entitiesData.map(e => e.continuidad),
+                            backgroundColor: '#0D9488',
+                            borderRadius: 6,
+                        },
+                        {
+                            label: 'Nuevos (52)',
+                            data: entitiesData.map(e => e.nuevos),
+                            backgroundColor: '#F59E0B',
+                            borderRadius: 6,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: { font: { family: 'Inter', size: 12, weight: '600' }, usePointStyle: true }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const ent = entitiesData[context.dataIndex];
+                                    if (context.datasetIndex === 0) {
+                                        return `Interno: ${ent.pctIntCont} | Total entidad: ${ent.total} (${ent.pctGlobalTotal} global)`;
+                                    } else {
+                                        return `Interno: ${ent.pctIntNuevos} | Total entidad: ${ent.total} (${ent.pctGlobalTotal} global)`;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { display: false },
+                            ticks: { font: { family: 'Inter', size: 11, weight: '600' } }
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            grid: { color: '#F1F5F9' },
+                            ticks: { font: { family: 'Inter', size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Arranque
+        window.addEventListener('DOMContentLoaded', () => {
+            renderEntityPills();
+            renderEntitySpotlight();
+            renderTable();
+            initCharts();
+        });
+    </script>
+</body>
+</html>
